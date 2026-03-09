@@ -1,0 +1,6 @@
+@PerfumeApi_HostAddress = http://localhost:5078
+
+GET {{PerfumeApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
