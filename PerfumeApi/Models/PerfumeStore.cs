@@ -30,23 +30,6 @@ namespace PerfumeApi.Models
         public string? ImagenUrl { get; set; }
     }
 
-    [Table("metodos_pago")] // Asegúrate que este sea el nombre real de tu tabla
-    public class MetodoPago
-    {
-        [Key]
-        [Column("idtarjeta")]
-        public long Id { get; set; } // bigint -> long
-
-        [Column("numerotarjeta")]
-        public string NumeroTarjeta { get; set; } = string.Empty;
-
-        [Column("fechavencimiento")]
-        public DateTime FechaVencimiento { get; set; }
-
-        [Column("nombretitular")]
-        public string NombreTitular { get; set; } = string.Empty;
-    }
-
     [Table("usuarios")]
     public class Usuario
     {

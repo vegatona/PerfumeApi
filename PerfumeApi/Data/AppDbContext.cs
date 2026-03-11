@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PerfumeApi.Models;
+using static PerfumeApi.Models.MetodoPagoDto;
 
 namespace PerfumeApi.Data
 {
@@ -7,7 +8,7 @@ namespace PerfumeApi.Data
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
         public DbSet<Usuario> Usuarios { get; set; }
-        public DbSet<MetodoPago> MetodosPago { get; set; }
+        public DbSet<MetodoPago> MetodosPago { get; set; } // Nombre limpio  
         public DbSet<Perfume> Perfumes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

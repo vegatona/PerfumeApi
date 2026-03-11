@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Npgsql;
 using PerfumeApi.Data;
 using PerfumeApi.Models;
 
@@ -26,49 +27,6 @@ namespace PerfumeApi.Controllers
                 .ToListAsync();
 
             return Ok(lista);
-        }
-
-        // Obtener un método de pago específico por su ID de tarjeta
-        [HttpGet("pagos/{idtarjeta}")]
-        public async Task<ActionResult<MetodoPago>> GetPagoPorId(long idtarjeta)
-        {
-            // Buscamos directamente por la llave primaria (idtarjeta)
-            var pago = await _context.MetodosPago.FindAsync(idtarjeta);
-
-            if (pago == null)
-            {
-                return NotFound($"No se encontró ninguna tarjeta con el ID {idtarjeta}");
-            }
-
-            return Ok(pago);
-        }
-
-        // Eliminar por idtarjeta
-        [HttpDelete("pagos/{idtarjeta}")]
-        public async Task<IActionResult> DeletePago(long idtarjeta)
-        {
-            // 1. Buscamos el registro en PostgreSQL usando la llave primaria
-            var pago = await _context.MetodosPago.FindAsync(idtarjeta);
-
-            // 2. Si no existe, devolvemos un error 404
-            if (pago == null)
-            {
-                return NotFound($"No se pudo eliminar: La tarjeta con ID {idtarjeta} no existe.");
-            }
-
-            // 3. Lo removemos del contexto de datos
-            _context.MetodosPago.Remove(pago);
-
-            // 4. Guardamos los cambios físicamente en la base de datos
-            await _context.SaveChangesAsync();
-
-            // 5. Devolvemos un mensaje de éxito
-            return Ok(new
-            {
-                Mensaje = "Eliminación exitosa",
-                IdTarjetaEliminada = idtarjeta,
-                FechaOperacion = DateTime.Now
-            });
         }
 
         // Buscar la dirección de envío de un usuario por su ID
