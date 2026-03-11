@@ -29,4 +29,35 @@ namespace PerfumeApi.Models
         [Column("imagen_url")]
         public string? ImagenUrl { get; set; }
     }
+
+    [Table("metodos_pago")] // Asegúrate que este sea el nombre real de tu tabla
+    public class MetodoPago
+    {
+        [Key]
+        [Column("idtarjeta")]
+        public long Id { get; set; } // bigint -> long
+
+        [Column("numerotarjeta")]
+        public string NumeroTarjeta { get; set; } = string.Empty;
+
+        [Column("fechavencimiento")]
+        public DateTime FechaVencimiento { get; set; }
+
+        [Column("nombretitular")]
+        public string NombreTitular { get; set; } = string.Empty;
+    }
+
+    [Table("usuarios")]
+    public class Usuario
+    {
+        [Key]
+        [Column("idusuario")]
+        public int Id { get; set; }
+
+        [Column("nombre")] // Asumiendo que tienes un campo nombre
+        public string Nombre { get; set; } = string.Empty;
+
+        [Column("direccion")] // La columna que mencionaste
+        public string Direccion { get; set; } = string.Empty;
+    }
 }
