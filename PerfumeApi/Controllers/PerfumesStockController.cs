@@ -8,11 +8,11 @@ namespace PerfumeApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PerfumesController : ControllerBase
+    public class PerfumesStockController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public PerfumesController(AppDbContext context)
+        public PerfumesStockController(AppDbContext context)
         {
             _context = context;
         }

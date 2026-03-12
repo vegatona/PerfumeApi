@@ -7,11 +7,11 @@ namespace PerfumeApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuariosController : ControllerBase
+    public class UsuariosInfController : ControllerBase
     {
         private readonly AppDbContext _context;
 
-        public UsuariosController(AppDbContext context)
+        public UsuariosInfController(AppDbContext context)
         {
             _context = context;
         }
