@@ -3,44 +3,35 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PerfumeApi.Models
 {
-    [Table("perfumes")] // Nombre de la tabla en tu Postgres
+    [Table("perfumes")]
     public class Perfume
     {
         [Key]
         [Column("idperfume")]
-        public long Id { get; set; }
+        public long IdPerfume { get; set; }
 
         [Column("nombreperfume")]
-        public string Nombre { get; set; } = string.Empty;
+        public string? Nombre { get; set; }
 
         [Column("marca")]
-        public string Marca { get; set; } = string.Empty;
+        public string? Marca { get; set; }
 
         [Column("precio")]
         public decimal Precio { get; set; }
 
-        [Column("stock")]
-        public int Stock { get; set; }
-
-        // Agregamos estos porque estaban en tu imagen
         [Column("descripcion")]
         public string? Descripcion { get; set; }
 
         [Column("imagen_url")]
         public string? ImagenUrl { get; set; }
-    }
 
-    [Table("usuarios")]
-    public class Usuario
-    {
-        [Key]
-        [Column("idusuario")]
-        public int Id { get; set; }
+        [Column("ocasion")]
+        public string? Ocasion { get; set; }
 
-        [Column("nombre")] // Asumiendo que tienes un campo nombre
-        public string Nombre { get; set; } = string.Empty;
+        [Column("genero")]
+        public string? Genero { get; set; }
 
-        [Column("direccion")] // La columna que mencionaste
-        public string Direccion { get; set; } = string.Empty;
+        [Column("stock")]
+        public int Stock { get; set; }
     }
 }

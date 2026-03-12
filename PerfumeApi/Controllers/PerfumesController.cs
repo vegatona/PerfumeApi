@@ -18,36 +18,21 @@ namespace PerfumeApi.Controllers
         }
 
         // Endpoint para listar perfumes con stock > 0
-        [HttpGet("stock")]
-        public async Task<ActionResult<IEnumerable<Perfume>>> GetConStock()
+        [HttpGet("disponibles")]
+        public async Task<ActionResult<IEnumerable<Perfume>>> GetPerfumesDisponibles()
         {
-            // Buscamos en la tabla 'perfumes' donde la columna 'stock' sea mayor a 0
-            var lista = await _context.Perfumes
-                .Where(p => p.Stock > 0)
+            // Al usar FromSqlRaw con la tabla 'perfumes', EF busca las columnas 
+            // que definimos arriba con [Column]
+            var perfumes = await _context.Perfumes
+                .FromSqlRaw("SELECT * FROM fn_listar_perfumes_disponibles()")
                 .ToListAsync();
 
-            return Ok(lista);
-        }
-
-        // Buscar la dirección de envío de un usuario por su ID
-        [HttpGet("usuarios/{idusuario}/direccion")]
-        public async Task<ActionResult<string>> GetDireccionUsuario(int idusuario)
-        {
-            // Buscamos al usuario por su ID
-            var usuario = await _context.Usuarios.FindAsync(idusuario);
-
-            if (usuario == null)
+            if (perfumes == null || !perfumes.Any())
             {
-                return NotFound($"No se encontró el usuario con ID {idusuario}");
+                return NotFound("No se encontraron perfumes con stock disponible.");
             }
 
-            // Devolvemos un objeto anónimo para que el JSON sea claro en Swagger
-            return Ok(new
-            {
-                IdUsuario = usuario.Id,
-                Nombre = usuario.Nombre,
-                DireccionEnvio = usuario.Direccion
-            });
+            return Ok(perfumes);
         }
     }
 }
